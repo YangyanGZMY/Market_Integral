@@ -1,0 +1,241 @@
+@import './var.scss';
+//font
+.f-dark{
+  color: $--font-dark;
+}
+.f-normal{
+  color: $--font-normal;
+}
+.f-light{
+  color: $--font-light;
+}
+.f-white{
+  color: $--color-white;
+}
+.f-primary{
+  color: $--color-primary;
+}
+.f-success{
+  color: $--color-success;
+}
+.f-warning{
+  color: $--color-warning;
+}
+.f-danger{
+  color: $--color-danger;
+}
+.f-info{
+  color: $--color-info;
+}
+.f-bold{
+  font-weight: bold;
+}
+@for $i from 12 through 32 {
+  @if($i % 2 == 0) {
+    .f-#{$i}{
+      font-size: $i + px;
+    }
+  }
+}
+//display
+.block{
+  display: block;
+}
+.inline-block{
+  display: inline-block;
+}
+
+//position
+.absolute{
+  position: absolute;
+}
+.relative{
+  position: relative;
+}
+
+// text-align
+.tc{
+  text-align: center;
+}
+.tl{
+  text-align: left;
+}
+.tr{
+  text-align: right;
+}
+
+//vertical-align
+.vertical-m{
+  vertical-align: middle;
+}
+
+// float
+.fl{
+  float: left;
+}
+
+.fr{
+  float: right;
+}
+
+// clear
+.clear-l{
+  clear: left;
+}
+
+.clear-r{
+  clear: right;
+}
+
+.clear{
+  clear: both;
+}
+
+.clearfix:after{
+  content: "\0020";
+  display: block;
+  height: 0;
+  clear: both;
+}
+
+//cursor
+.c-pointer{
+  cursor: pointer;
+}
+
+//padding && margin
+.no-pd{
+  padding: 0 !important;
+}
+.no-mg{
+  margin: 0 !important;
+}
+
+//divider-line
+hr{
+  height: 1px;
+  background: $--color-border-line;
+  clear: both;
+  display: block;
+  border: 0;
+  unicode-bidi: isolate;
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+  overflow: hidden;
+}
+.hr-primary{
+  background-color: $--color-primary!important;
+}
+.hr-success{
+  background-color: $--color-success!important;
+}
+.hr-warning{
+  background-color: $--color-warning!important;
+}
+.hr-danger{
+  background-color: $--color-danger!important;
+}
+.hr-info{
+  background-color: $--color-info!important;
+}
+
+//a style
+.a-primary,.a-success,.a-warning,.a-danger,.a-info, .a-default{text-decoration: underline !important;cursor: pointer;}
+.a-primary{
+  color: $--color-primary;
+}
+.a-primary:hover{
+  color: mix($--color-white, $--color-primary, 20%);
+}
+.a-success{
+  color: $--color-success;
+}
+.a-success:hover{
+  color: mix($--color-white, $--color-success, 20%);
+}
+.a-warning{
+  color: $--color-warning;
+}
+.a-warning:hover{
+  color: mix($--color-white, $--color-warning, 20%);
+}
+.a-danger{
+  color: $--color-danger;
+}
+.a-danger:hover{
+  color: mix($--color-white, $--color-danger, 20%);
+}
+.a-info{
+  color: $--color-info;
+}
+.a-info:hover{
+  color: mix($--color-white, $--color-info, 20%);
+}
+
+.a-ban{
+  cursor: not-allowed !important;
+  filter: alpha(opacity=50);
+  -moz-opacity: 0.5;
+  opacity: 0.5;
+}
+
+$i: 0;
+$end : 100;
+@while $i < $end {
+  $i: $i + 5;
+  .mg-t-#{$i} {
+    margin-top:#{$i}px;
+  }
+  .mg-b-#{$i} {
+    margin-bottom:#{$i}px;
+  }
+  .mg-l-#{$i} {
+    margin-left:#{$i}px;
+  }
+  .mg-r-#{$i} {
+    margin-right:#{$i}px;
+  }
+
+  .mg-tb-#{$i} {
+    margin-top:#{$i}px;
+    margin-bottom:#{$i}px;
+  }
+
+  .mg-lr-#{$i} {
+    margin-left:#{$i}px;
+    margin-right:#{$i}px;
+  }
+
+  .mg-#{$i} {
+    margin:#{$i}px;
+  }
+
+  .pd-t-#{$i} {
+    padding-top:#{$i}px;
+  }
+  .pd-b-#{$i} {
+    padding-bottom:#{$i}px;
+  }
+  .pd-l-#{$i} {
+    padding-left:#{$i}px;
+  }
+  .pd-r-#{$i} {
+    padding-right:#{$i}px;
+  }
+  .pd-tb-#{$i} {
+    padding-top:#{$i}px;
+    padding-bottom:#{$i}px;
+  }
+  .pd-lr-#{$i} {
+    padding-left:#{$i}px;
+    padding-right:#{$i}px;
+  }
+
+  .pd-#{$i} {
+    padding:#{$i}px;
+  }
+}
+
+
