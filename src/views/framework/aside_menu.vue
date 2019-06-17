@@ -1,7 +1,6 @@
 <template>
   <el-menu
     :default-active="activeIndex2"
-    class="el-menu-demo"
     mode="horizontal"
     @select="handleSelect"
     background-color="#545c64"
@@ -21,7 +20,7 @@
       </el-submenu>
     </el-submenu>
     <el-menu-item index="3" disabled>消息中心</el-menu-item>
-    <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
+    <el-menu-item index="4"></el-menu-item>
   </el-menu>
 </template>
 
@@ -32,6 +31,9 @@ export default {
     return {
       activeIndex2: '1'
     }
+  },
+  methods: {
+    handleSelect () {}
   }
 }
 </script>
@@ -39,7 +41,6 @@ export default {
 <style lang="scss" scoped>
   .sidebar-container .el-menu {
     border: none;
-    height: 100vh;
     width: 100%!important;
   }
 </style>

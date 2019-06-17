@@ -1,16 +1,16 @@
 <template>
-  <div class="member-bar pd-5">
-    <el-card class="no-pd" id="memberBox">
+  <div class="convert-bar pd-5">
+    <el-card class="no-pd" id="integralBox">
       <el-row>
         <el-col :span="17">
-          <el-input v-model="memberInfo" suffix-icon="el-icon-search"></el-input>
+          <el-input v-model="convertInfo" suffix-icon="el-icon-search"></el-input>
         </el-col>
         <el-col :span="7">
-          <el-button class="fr" size="small" type="warning" icon="el-icon-edit" @click="search">注册</el-button>
+          <el-button class="fr" size="small" type="primary" icon="el-icon-shopping-cart-1" @click="search">兑换</el-button>
         </el-col>
       </el-row>
       <el-divider></el-divider>
-      <el-table :height="tableHeight" class="mg-t-10" :data="memberData" border :summary-method="getSummaries" show-summary>
+      <el-table :height="tableHeight" class="mg-t-10" :data="memberData" border>
         <el-table-column
           align="center"
           prop="name"
@@ -18,14 +18,14 @@
         </el-table-column>
         <el-table-column
           align="center"
-          prop="phone"
-          min-width="100"
-          label="电话">
+          prop="num"
+          label="已兑换">
         </el-table-column>
         <el-table-column
           align="center"
-          prop="num"
-          label="积分">
+          prop="time"
+          min-width="160"
+          label="时间">
         </el-table-column>
       </el-table>
     </el-card>
@@ -34,11 +34,10 @@
 
 <script>
 import memberData from '@/option/memberData'
-
 export default {
   data () {
     return {
-      memberInfo: null,
+      convertInfo: null,
       memberData: memberData,
       tableHeight: null
     }
@@ -63,8 +62,10 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-  .member-bar{
+<style lang="scss">
+  @import '../../assets/scss/var';
+  @import '../../assets/scss/theme';
+  .convert-bar{
     height: 100%;
   }
   .el-card{

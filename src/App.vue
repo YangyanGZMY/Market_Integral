@@ -7,5 +7,7 @@
 <script>
 </script>
 
-<style lang="less">
+<style lang="scss">
+  @import 'assets/scss/global';
+  @import 'assets/scss/common';
 </style>
