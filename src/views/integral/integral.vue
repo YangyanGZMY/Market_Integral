@@ -4,7 +4,7 @@
       <el-row>
         <el-row>
           <el-col :span="6">
-            <el-radio-group class="mg-t-10" v-model="searchKey" @change="selectChange">
+            <el-radio-group class="mg-t-10" v-model="searchKey">
               <el-radio label="phone">电话</el-radio>
               <el-radio label="num">金额</el-radio>
             </el-radio-group>
@@ -13,7 +13,7 @@
             <el-input type="text" v-model="searchText" suffix-icon="el-icon-search"></el-input>
           </el-col>
           <el-col :span="7">
-            <el-button class="fr" size="small" type="warning" icon="el-icon-search" @click="add">添加</el-button>
+            <el-button class="fr" size="small" type="warning" icon="el-icon-shopping-cart-1" @click="add">添加</el-button>
             <el-button class="fr" style="margin-right: 10px;" size="small" type="primary" icon="el-icon-search" @click="search">搜索</el-button>
           </el-col>
         </el-row>
@@ -49,25 +49,40 @@
         </el-table>
       </el-row>
     </el-card>
+    <integral-layer v-if="addAmountFlag" :addAmountFlag="addAmountFlag"
+                    @cancel="cancelIntegral"
+                    @save="saveIntegral"></integral-layer>
   </div>
 </template>
 
 <script>
 import integralData from '@/option/memberData'
+import integralLayer from '@/components/business/integral_layer.vue'
+
 export default {
   data () {
     return {
       searchKey: 'phone',
       searchText: null,
       tableHeight: null,
-      integralData: integralData
+      integralData: integralData,
+      addAmountFlag: false
     }
   },
+  components: { integralLayer },
   methods: {
-    selectChange () {
+    search () {
+      console.log(this.searchKey)
     },
-    search () {},
-    add () {}
+    add () {
+      this.addAmountFlag = true
+    },
+    cancelIntegral () {
+      this.addAmountFlag = false
+    },
+    saveIntegral () {
+      this.addAmountFlag = false
+    }
   },
   mounted () {
     let contentBox = document.getElementById('integralBox')

@@ -6,7 +6,7 @@
           <el-input v-model="memberInfo" suffix-icon="el-icon-search"></el-input>
         </el-col>
         <el-col :span="7">
-          <el-button class="fr" size="small" type="warning" icon="el-icon-edit" @click="search">注册</el-button>
+          <el-button class="fr" size="small" type="warning" icon="el-icon-edit" @click="registered">注册</el-button>
         </el-col>
       </el-row>
       <el-divider></el-divider>
@@ -29,22 +29,37 @@
         </el-table-column>
       </el-table>
     </el-card>
+    <registered-layer v-if="addMemberFlag" :addMemberFlag="addMemberFlag"
+                      @cancel="cancelRegistered"
+                      @save="saveRegistered"
+    ></registered-layer>
   </div>
 </template>
 
 <script>
 import memberData from '@/option/memberData'
+import registeredLayer from '@/components/business/registered_layer.vue'
 
 export default {
   data () {
     return {
       memberInfo: null,
       memberData: memberData,
-      tableHeight: null
+      tableHeight: null,
+      addMemberFlag: false
     }
   },
+  components: { registeredLayer },
   methods: {
-    search () {},
+    registered () {
+      this.addMemberFlag = true
+    },
+    cancelRegistered () {
+      this.addMemberFlag = false
+    },
+    saveRegistered () {
+      this.addMemberFlag = false
+    },
     getSummaries (param) {
       const sum = []
       sum[0] = '合计'

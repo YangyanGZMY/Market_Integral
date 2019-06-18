@@ -6,7 +6,7 @@
           <el-input v-model="convertInfo" suffix-icon="el-icon-search"></el-input>
         </el-col>
         <el-col :span="7">
-          <el-button class="fr" size="small" type="primary" icon="el-icon-shopping-cart-1" @click="search">兑换</el-button>
+          <el-button class="fr" size="small" type="primary" icon="el-icon-s-shop" @click="convert">兑换</el-button>
         </el-col>
       </el-row>
       <el-divider></el-divider>
@@ -29,21 +29,35 @@
         </el-table-column>
       </el-table>
     </el-card>
+    <convert-layer v-if="convertFlag" :convertFlag="convertFlag"
+                   @cancel="cancelConvert"
+                   @save="saveConvert"></convert-layer>
   </div>
 </template>
 
 <script>
 import memberData from '@/option/memberData'
+import convertLayer from '@/components/business/convert_layer.vue'
 export default {
   data () {
     return {
       convertInfo: null,
       memberData: memberData,
-      tableHeight: null
+      tableHeight: null,
+      convertFlag: false
     }
   },
+  components: { convertLayer },
   methods: {
-    search () {},
+    convert () {
+      this.convertFlag = true
+    },
+    cancelConvert () {
+      this.convertFlag = false
+    },
+    saveConvert () {
+      this.convertFlag = false
+    },
     getSummaries (param) {
       const sum = []
       sum[0] = '合计'

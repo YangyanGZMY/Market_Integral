@@ -47,26 +47,26 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
 //  }
 //}
 // dialog
-//.el-dialog__header{
-//  background: $--color-primary;
-//  padding: 10px !important;
-//  .el-dialog__title{
-//    color: $--color-white !important;
-//    font-weight: bold;
-//  }
-//  .el-dialog__headerbtn{
-//    top: 14px !important;
-//  }
-//}
-//
-//.el-dialog__body{
-//  padding: 20px;
-//}
-//
-//.el-dialog__footer{
-//  border-top: 1px solid $--color-border-line;
-//  padding: 10px 20px !important;
-//}
+.el-dialog__header{
+  background: $--color-primary;
+  padding: 10px !important;
+  .el-dialog__title{
+    color: $--color-white !important;
+    font-weight: bold;
+  }
+  .el-dialog__headerbtn{
+    top: 14px !important;
+  }
+}
+
+.el-dialog__body{
+  padding: 20px;
+}
+
+.el-dialog__footer{
+  border-top: 1px solid $--color-border-line;
+  padding: 10px 20px !important;
+}
 //
 //.expand .el-table__expand-column .cell {
 //  display: none;
