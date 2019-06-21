@@ -68,7 +68,6 @@ export default {
       } else {
         if (mobile.test(value) || tel.test(value)) {
           await api.member.checkPhone({ phone: value }).then(response => {
-            console.log(response.result)
             if (response.result) {
               return callback(new Error('号码不存在，请重新输入'))
             } else {

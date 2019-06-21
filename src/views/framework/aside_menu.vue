@@ -3,7 +3,7 @@
     :default-active="activeIndex2"
     mode="horizontal"
     @select="handleSelect"
-    background-color="#545c64"
+    background-color="#564e4e"
     text-color="#fff"
     active-text-color="#ffd04b">
     <!--<div class="form-sub-title-box">-->

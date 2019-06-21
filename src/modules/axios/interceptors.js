@@ -28,8 +28,6 @@ export const resError = (error) => {
   setTimeout(() => {
     // store.dispatch('clearLoading')
   }, 1000)
-  console.log(error)
-  console.log(error.response)
   if (error.response.status === 404) {
     Message.error('Not　Found')
   } else {

@@ -88,7 +88,6 @@ export default {
         if (mobile.test(value) || tel.test(value)) {
           if (this.regFlag) {
             await api.member.checkPhone({ phone: value }).then(response => {
-              console.log(response.result)
               if (response.result) {
                 this.regFlag = false
                 return callback(new Error('该号码未注册会员，现在注册或重新输入'))

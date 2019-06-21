@@ -56,7 +56,6 @@ export default {
       } else {
         if (mobile.test(value) || tel.test(value)) {
           await api.member.checkPhone({ phone: value }).then(response => {
-            console.log(response.result)
             if (response.result) {
               return callback()
             } else {

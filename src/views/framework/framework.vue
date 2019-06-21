@@ -1,6 +1,9 @@
 <template>
   <el-container class="sidebar-container">
     <el-header class="no-pd">
+      <!--<div class="form-sub-title-box">-->
+      <!--<span class="sub-title sub-title-primary">洋越超市</span>-->
+      <!--</div>-->
       <aside-menu></aside-menu>
     </el-header>
     <el-main>
@@ -29,5 +32,6 @@ export default {
   }
   .el-main{
     padding: 10px;
+    background-color: #e4e4e4;
   }
 </style>
