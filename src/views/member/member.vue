@@ -32,7 +32,7 @@
         <el-table-column
           align="center"
           prop="sumIntegral"
-          label="积分">
+          label="总积分">
         </el-table-column>
       </el-table>
     </el-card>
