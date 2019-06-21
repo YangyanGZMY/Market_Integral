@@ -3,28 +3,35 @@
     <el-card class="no-pd" id="memberBox">
       <el-row>
         <el-col :span="17">
-          <el-input v-model="memberInfo" suffix-icon="el-icon-search"></el-input>
+          <el-autocomplete
+            v-model="memberInfo"
+            :fetch-suggestions="querySearchAsync"
+            @select="handleSelect"
+            placeholder="请输入会员名"
+            suffix-icon="el-icon-search"
+          >
+          </el-autocomplete>
         </el-col>
         <el-col :span="7">
           <el-button class="fr" size="small" type="warning" icon="el-icon-edit" @click="registered">注册</el-button>
         </el-col>
       </el-row>
       <el-divider></el-divider>
-      <el-table :height="tableHeight" class="mg-t-10" :data="memberData" border :summary-method="getSummaries" show-summary>
+      <el-table :height="tableHeight" class="market-table mg-t-10" :data="memberData" border :summary-method="getSummaries" show-summary>
         <el-table-column
           align="center"
-          prop="name"
+          prop="memberName"
           label="会员">
         </el-table-column>
         <el-table-column
           align="center"
-          prop="phone"
+          prop="memberPhone"
           min-width="100"
           label="电话">
         </el-table-column>
         <el-table-column
           align="center"
-          prop="num"
+          prop="sumIntegral"
           label="积分">
         </el-table-column>
       </el-table>
@@ -37,43 +44,85 @@
 </template>
 
 <script>
-import memberData from '@/option/memberData'
 import registeredLayer from '@/components/business/registered_layer.vue'
+import api from '@/api'
+import { Message } from 'element-ui'
 
 export default {
   data () {
     return {
       memberInfo: null,
-      memberData: memberData,
+      memberData: [],
       tableHeight: null,
       addMemberFlag: false
     }
   },
   components: { registeredLayer },
   methods: {
+    querySearchAsync (queryString, callback) {
+      let param = {
+        name: queryString
+      }
+      api.member.autoComplete(param).then(response => {
+        if (typeof callback === 'function') {
+          callback(response.result)
+        }
+        this.memberData = response.result
+      })
+    },
+    handleSelect (item) {
+      this.memberData = []
+      this.memberData.push(item)
+    },
     registered () {
       this.addMemberFlag = true
     },
     cancelRegistered () {
       this.addMemberFlag = false
     },
-    saveRegistered () {
-      this.addMemberFlag = false
+    saveRegistered (form) {
+      api.member.add(form).then(response => {
+        Message.success('添加成功')
+        this.querySearchAsync()
+        this.addMemberFlag = false
+      })
     },
     getSummaries (param) {
-      const sum = []
-      sum[0] = '合计'
-      sum[1] = param.data.length + '人'
-      const values = param.data.map(item => item.num)
-      const reducer = (prev, curr) => Number(prev) + Number(curr)
-      sum[2] = values.reduce(reducer) + ' 分'
-      return sum
+      const { columns, data } = param
+      const sums = []
+      columns.forEach((column, index) => {
+        if (index === 0) {
+          sums[index] = '合计'
+          return
+        }
+        const values = data.map(item => Number(item[column.property]))
+        if (column.property === 'sumIntegral') {
+          sums[index] = values.reduce((prev, curr) => {
+            const value = Number(curr)
+            if (!isNaN(value)) {
+              return prev + curr
+            } else {
+              return prev
+            }
+          }, 0)
+          sums[index] += ' 分'
+        } else {
+          sums[index] = data.length + ' 人'
+        }
+      })
+      return sums
     }
   },
   mounted () {
     let contentBox = document.getElementById('memberBox')
     let contentHeight = window.getComputedStyle(contentBox).height
     this.tableHeight = parseInt(contentHeight.substring(0, contentHeight.length - 2)) - 100
+    this.$bus.off('refreshMember').on('refreshMember', item => {
+      this.querySearchAsync()
+    })
+  },
+  created () {
+    this.querySearchAsync()
   }
 }
 </script>

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import framework from '@/views/framework/framework'
+import home from '@/views/home/home'
 
 Vue.use(Router)
 
@@ -9,9 +10,16 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
+      path: '/ui',
       name: 'framework',
-      component: framework
+      component: framework,
+      children: [
+        {
+          path: '/ui/home',
+          name: 'Home',
+          component: home
+        }
+      ]
     }
     // ,
     // {

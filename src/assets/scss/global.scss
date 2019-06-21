@@ -71,7 +71,7 @@ a, a:focus, a:hover {
   }
 }
 
-.form-sub-titile-box{
+.form-sub-title-box{
   display: block;
   font-weight: bold;
 
@@ -93,28 +93,28 @@ a, a:focus, a:hover {
     -khtml-user-select: none;
     user-select: none;
   }
-  //.sub-title-primary{
-  //  background: url("/static/image/sub_title_bg_primary.png");
-  //  background-size:100%;
-  //}
-  //
-  //.sub-title-success{
-  //  background: url("/static/image/sub_title_bg_success.png") no-repeat;
-  //  background-size:100%;
-  //}
-  //
-  //.sub-title-warning{
-  //  background: url("/static/image/sub_title_bg_warning.png") no-repeat;
-  //  background-size:100%;
-  //}
-  //
-  //.sub-title-danger{
-  //  background: url("/static/image/sub_title_bg_danger.png") no-repeat;
-  //  background-size:100%;
-  //}
-  //
-  //.sub-title-default{
-  //  background: url("/static/image/sub_title_bg_default.png") no-repeat;
-  //  background-size:100%;
-  //}
+  .sub-title-primary{
+    background: url("/public/image/sub_title_bg_primary.png");
+    background-size:100%;
+  }
+
+  .sub-title-success{
+    background: url("/public/image/sub_title_bg_success.png") no-repeat;
+    background-size:100%;
+  }
+
+  .sub-title-warning{
+    background: url("/public/image/sub_title_bg_warning.png") no-repeat;
+    background-size:100%;
+  }
+
+  .sub-title-danger{
+    background: url("/public/image/sub_title_bg_danger.png") no-repeat;
+    background-size:100%;
+  }
+
+  .sub-title-default{
+    background: url("/public/image/sub_title_bg_default.png") no-repeat;
+    background-size:100%;
+  }
 }

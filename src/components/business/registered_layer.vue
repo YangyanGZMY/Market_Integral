@@ -8,7 +8,7 @@
     width="400px">
     <el-form :model="form" ref="addMemberForm" :rules="rules" label-position="left">
       <el-form-item prop="name" label="姓名" label-width="65px">
-        <el-input v-model="form.name" suffix-icon="el-icon-user-solid"></el-input>
+        <el-input v-model="form.name" maxlength="10" suffix-icon="el-icon-user-solid"></el-input>
       </el-form-item>
       <el-form-item  prop="phone" label="电话" label-width="65px">
         <el-input v-model.number="form.phone" suffix-icon="el-icon-phone"></el-input>
@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import api from '@/api'
 export default {
   data () {
     return {
@@ -30,8 +31,8 @@ export default {
         name: null
       },
       rules: {
-        name: [{ required: true, min: 1, max: 10, trigger: 'blur' }],
-        phone: [{ validator: this.checkPhone, required: true, trigger: 'blur' }]
+        name: [{ required: true, message: '请输入姓名', trigger: 'blur' }],
+        phone: [{ required: true, validator: this.checkPhone, trigger: [] }]
       }
     }
   },
@@ -41,10 +42,31 @@ export default {
       this.$emit('cancel')
     },
     save () {
-      this.$emit('save')
+      this.$refs.addMemberForm.validate((valid) => {
+        if (valid) {
+          this.$emit('save', this.form)
+        }
+      })
     },
     async checkPhone (rule, value, callback) {
-      return callback()
+      let mobile = /^(13[0-9]{9})|(18[0-9]{9})|(14[0-9]{9})|(17[0-9]{9})|(15[0-9]{9})$/
+      let tel = /^\d{3,4}-?\d{7,9}$/
+      if (!value) {
+        return callback(new Error('请输入电话号码'))
+      } else {
+        if (mobile.test(value) || tel.test(value)) {
+          await api.member.checkPhone({ phone: value }).then(response => {
+            console.log(response.result)
+            if (response.result) {
+              return callback()
+            } else {
+              return callback(new Error('号码已存在，请重新输入'))
+            }
+          })
+        } else {
+          return callback(new Error('请输入正确的电话号码'))
+        }
+      }
     }
   }
 }

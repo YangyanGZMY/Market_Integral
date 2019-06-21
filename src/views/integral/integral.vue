@@ -6,7 +6,7 @@
           <el-col :span="6">
             <el-radio-group class="mg-t-10" v-model="searchKey">
               <el-radio label="phone">电话</el-radio>
-              <el-radio label="num">金额</el-radio>
+              <el-radio label="amount">金额</el-radio>
             </el-radio-group>
           </el-col>
           <el-col :span="11">
@@ -18,31 +18,31 @@
           </el-col>
         </el-row>
         <el-divider></el-divider>
-        <el-table :height="tableHeight" class="mg-t-10" :data="integralData" border>
+        <el-table :height="tableHeight" class="market-table mg-t-10" :data="integralData" border>
           <el-table-column
             align="center"
-            prop="name"
+            prop="memberName"
             label="会员">
           </el-table-column>
           <el-table-column
             align="center"
-            prop="phone"
+            prop="memberPhone"
             min-width="100"
             label="电话">
           </el-table-column>
           <el-table-column
             align="center"
-            prop="amount"
+            prop="amountNum"
             label="金额">
           </el-table-column>
           <el-table-column
             align="center"
-            prop="num"
+            prop="integralNum"
             label="积分">
           </el-table-column>
           <el-table-column
             align="center"
-            prop="time"
+            prop="createYmdt"
             min-width="160"
             label="时间">
           </el-table-column>
@@ -56,8 +56,9 @@
 </template>
 
 <script>
-import integralData from '@/option/memberData'
 import integralLayer from '@/components/business/integral_layer.vue'
+import api from '@/api'
+import { Message } from 'element-ui'
 
 export default {
   data () {
@@ -65,14 +66,19 @@ export default {
       searchKey: 'phone',
       searchText: null,
       tableHeight: null,
-      integralData: integralData,
-      addAmountFlag: false
+      integralData: [],
+      addAmountFlag: false,
+      searchForm: {}
     }
   },
   components: { integralLayer },
   methods: {
     search () {
-      console.log(this.searchKey)
+      this.searchForm = {}
+      this.searchForm[this.searchKey] = this.searchText
+      api.integral.getLogs(this.searchForm).then(response => {
+        this.integralData = response.result
+      })
     },
     add () {
       this.addAmountFlag = true
@@ -80,14 +86,22 @@ export default {
     cancelIntegral () {
       this.addAmountFlag = false
     },
-    saveIntegral () {
-      this.addAmountFlag = false
+    saveIntegral (form) {
+      api.integral.add(form).then(response => {
+        Message.success('添加成功')
+        this.search()
+        this.$bus.emit('refreshMember')
+        this.addAmountFlag = false
+      })
     }
   },
   mounted () {
     let contentBox = document.getElementById('integralBox')
     let contentHeight = window.getComputedStyle(contentBox).height
     this.tableHeight = parseInt(contentHeight.substring(0, contentHeight.length - 2)) - 100
+  },
+  created () {
+    this.search()
   }
 }
 </script>
