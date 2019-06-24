@@ -7,7 +7,7 @@
             v-model="memberInfo"
             :fetch-suggestions="querySearchAsync"
             @select="handleSelect"
-            placeholder="请输入会员名"
+            placeholder="请输入会员电话"
             suffix-icon="el-icon-search"
           >
           </el-autocomplete>
@@ -61,7 +61,7 @@ export default {
   methods: {
     querySearchAsync (queryString, callback) {
       let param = {
-        name: queryString
+        phone: queryString
       }
       api.member.autoComplete(param).then(response => {
         if (typeof callback === 'function') {
@@ -71,6 +71,7 @@ export default {
       })
     },
     handleSelect (item) {
+      this.memberInfo = item.memberPhone
       this.memberData = []
       this.memberData.push(item)
     },

@@ -18,7 +18,7 @@
           </el-col>
         </el-row>
         <el-divider></el-divider>
-        <el-table :height="tableHeight" class="market-table mg-t-10" :data="integralData" border>
+        <el-table :height="tableHeight" class="market-table mg-t-10" :data="integralData" border v-loadmore="loadMore">
           <el-table-column
             align="center"
             prop="memberName"
@@ -68,17 +68,29 @@ export default {
       tableHeight: null,
       integralData: [],
       addAmountFlag: false,
-      searchForm: {}
+      searchForm: {},
+      pageSize: 20,
+      currentPage: 1,
+      loadSign: true
     }
   },
   components: { integralLayer },
   methods: {
-    search () {
+    get () {
       this.searchForm = {}
       this.searchForm[this.searchKey] = this.searchText
+      this.searchForm['pageSize'] = this.pageSize
+      this.searchForm['currentPage'] = this.currentPage
       api.integral.getLogs(this.searchForm).then(response => {
-        this.integralData = response.result
+        if (response.result.list.length > 0) {
+          this.integralData = this.integralData.concat(response.result.list)
+          this.total = response.result.total
+        }
       })
+    },
+    search () {
+      this.searchRefresh()
+      this.get()
     },
     add () {
       this.addAmountFlag = true
@@ -89,10 +101,31 @@ export default {
     saveIntegral (form) {
       api.integral.add(form).then(response => {
         Message.success('添加成功')
-        this.search()
+        this.searchRefresh()
+        this.get()
         this.$bus.emit('refreshMember')
         this.addAmountFlag = false
       })
+    },
+    searchRefresh () {
+      this.pageSize = 20
+      this.currentPage = 1
+      this.integralData = []
+      this.loadSign = true
+    },
+    loadMore () {
+      if (this.loadSign) {
+        this.loadSign = false
+        this.currentPage++
+        if (this.total === this.integralData.length) {
+          return
+        }
+        this.get()
+        setTimeout(() => {
+          this.loadSign = true
+        }, 1000)
+        console.log('到底了', this.currentPage)
+      }
     }
   },
   mounted () {
@@ -101,7 +134,7 @@ export default {
     this.tableHeight = parseInt(contentHeight.substring(0, contentHeight.length - 2)) - 100
   },
   created () {
-    this.search()
+    this.get()
   }
 }
 </script>

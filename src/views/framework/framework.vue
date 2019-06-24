@@ -2,9 +2,9 @@
   <el-container class="sidebar-container">
     <el-header class="no-pd">
       <div class="form-sub-title-box">
-        <span class="sub-title-ming">铭</span>
-        <span class="sub-title sub-title-primary">洋越食品超市</span>
-        <span class="sub-title-detial">学生用品&nbsp;&nbsp;日用小百&nbsp;&nbsp;五金日杂&nbsp;&nbsp;水暖电料</span>
+        <!--<span class="sub-title-ming">铭</span>-->
+        <!--<span class="sub-title sub-title-primary">洋越食品超市</span>-->
+        <!--<span class="sub-title-detial">学生用品&nbsp;&nbsp;日用小百&nbsp;&nbsp;五金日杂&nbsp;&nbsp;水暖电料</span>-->
       </div>
       <!--<aside-menu></aside-menu>-->
     </el-header>

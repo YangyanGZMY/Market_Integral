@@ -9,7 +9,7 @@
         <integral-bar></integral-bar>
       </el-col>
       <el-col :span="convertWith">
-        <convert-bar></convert-bar>
+          <convert-bar></convert-bar>
       </el-col>
     </el-row>
   </div>
@@ -19,6 +19,8 @@
 import memberBar from '@/views/member/member'
 import integralBar from '@/views/integral/integral'
 import convertBar from '@/views/convert/convert'
+import carouselBar from '@/views/convert/carousel'
+
 export default {
   data () {
     return {
@@ -27,7 +29,7 @@ export default {
       convertWith: 6
     }
   },
-  components: { memberBar, integralBar, convertBar },
+  components: { memberBar, integralBar, convertBar, carouselBar },
   methods: {
     memberMove () {
       if (this.memberWith === 6) {

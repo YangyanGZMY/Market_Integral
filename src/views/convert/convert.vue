@@ -1,6 +1,15 @@
 <template>
   <div class="convert-bar pd-5">
-    <el-card class="no-pd" id="integralBox">
+    <div class="pd-b-5" style="height: 10%">
+      <el-carousel direction="vertical" :autoplay="false">
+        <el-carousel-item v-for="item in carouselData" :key="item.logSeq">
+          <label class="el-icon-bell mg-t-10">恭喜 {{ item.memberName }} : </label>
+          <!--<h3 >恭喜 {{ item.memberName }} : </h3>-->
+          <h3>成功兑换 {{ item.integralNum }} 积分</h3>
+        </el-carousel-item>
+      </el-carousel>
+    </div>
+    <el-card class="no-pd" style="height: 89.4%" id="convertBox">
       <el-row>
         <el-col :span="17">
           <el-autocomplete
@@ -37,7 +46,8 @@
     </el-card>
     <convert-layer v-if="convertFlag" :convertFlag="convertFlag"
                    @cancel="cancelConvert"
-                   @save="saveConvert"></convert-layer>
+                   @save="saveConvert">
+    </convert-layer>
   </div>
 </template>
 
@@ -52,11 +62,19 @@ export default {
       convertData: [],
       tableHeight: null,
       convertFlag: false,
-      timeout: null
+      timeout: null,
+      carouselData: []
     }
   },
   components: { convertLayer },
   methods: {
+    // change () {
+    //   this.convertData.push(this.convertData[0])
+    //   this.convertData.shift()
+    // },
+    // play () {
+    //   setInterval(this.change, 2000)
+    // },
     querySearchAsync (queryString, callback) {
       let param = {
         name: queryString
@@ -76,6 +94,8 @@ export default {
     getConvert (param) {
       api.convert.getConverts(param).then(response => {
         this.convertData = response.result
+        this.carouselData = this.convertData.slice(0, 5)
+        console.log(this.carouselData)
       })
     },
     convert () {
@@ -98,12 +118,13 @@ export default {
     }
   },
   mounted () {
-    let contentBox = document.getElementById('integralBox')
+    let contentBox = document.getElementById('convertBox')
     let contentHeight = window.getComputedStyle(contentBox).height
     this.tableHeight = parseInt(contentHeight.substring(0, contentHeight.length - 2)) - 100
   },
   created () {
     this.getConvert()
+    // this.play()
     // this.querySearchAsync()
   }
 }
@@ -117,5 +138,39 @@ export default {
   }
   .el-card{
     height: 100%;
+  }
+  .el-carousel{
+    height: 100%;
+  }
+  .el-carousel__container{
+    height: 100%;
+  }
+  .el-carousel__item{
+    height: 27% !important;
+  }
+  .el-carousel__item h3 {
+    color: #475669;
+    opacity: 0.75;
+    margin: 0;
+    text-align: center;
+    font-size: 21px;
+    padding-top: 10px;
+  }
+
+  .el-carousel__item:nth-child(1) {
+    background-color: #7B68EE;
+  }
+
+  .el-carousel__item:nth-child(2) {
+    background-color: #87CEFA;
+  }
+  .el-carousel__item:nth-child(3) {
+    background-color: #87CEFA;
+  }
+  .el-carousel__item:nth-child(4) {
+    background-color: #ccc;
+  }
+  .el-carousel__item:nth-child(5) {
+    background-color: #87CEFA;
   }
 </style>
