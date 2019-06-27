@@ -1,7 +1,7 @@
 <template>
   <div class="convert-bar pd-5">
     <div class="pd-b-5" style="height: 10%">
-      <el-carousel direction="vertical" :autoplay="false">
+      <el-carousel direction="vertical" :autoplay="true">
         <el-carousel-item v-for="item in carouselData" :key="item.logSeq">
           <label class="el-icon-bell mg-t-10">恭喜 {{ item.memberName }} : </label>
           <!--<h3 >恭喜 {{ item.memberName }} : </h3>-->
