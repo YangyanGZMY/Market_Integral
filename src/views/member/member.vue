@@ -1,22 +1,22 @@
 <template>
   <div class="member-bar pd-5">
     <el-card class="no-pd" id="memberBox">
+      <div slot="header" class="clearfix">
+        <span class="card-title">会员中心</span>
+        <el-button class="fr" size="small" type="warning" icon="el-icon-edit" @click="registered">注册</el-button>
+      </div>
       <el-row>
-        <el-col :span="17">
+        <el-col :span="24">
           <el-autocomplete
             v-model="memberInfo"
             :fetch-suggestions="querySearchAsync"
             @select="handleSelect"
             placeholder="请输入会员电话"
             suffix-icon="el-icon-search"
-          >
+          style="width: 100%;">
           </el-autocomplete>
         </el-col>
-        <el-col :span="7">
-          <el-button class="fr" size="small" type="warning" icon="el-icon-edit" @click="registered">注册</el-button>
-        </el-col>
       </el-row>
-      <el-divider></el-divider>
       <el-table :height="tableHeight" class="market-table mg-t-10" :data="memberData" border :summary-method="getSummaries" show-summary>
         <el-table-column
           align="center"
@@ -32,7 +32,7 @@
         <el-table-column
           align="center"
           prop="sumIntegral"
-          label="总积分">
+          label="积分余额">
         </el-table-column>
       </el-table>
     </el-card>
@@ -117,7 +117,9 @@ export default {
   mounted () {
     let contentBox = document.getElementById('memberBox')
     let contentHeight = window.getComputedStyle(contentBox).height
-    this.tableHeight = parseInt(contentHeight.substring(0, contentHeight.length - 2)) - 100
+    console.log(contentHeight)
+    this.tableHeight = parseInt(contentHeight.substring(0, contentHeight.length - 2)) + 200
+    console.log(this.tableHeight)
     this.$bus.off('refreshMember').on('refreshMember', item => {
       this.querySearchAsync()
     })

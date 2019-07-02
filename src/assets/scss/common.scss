@@ -237,6 +237,11 @@ $end : 100;
   .pd-#{$i} {
     padding:#{$i}px;
   }
+  .card-title {
+    color: #2f9688;
+    font-size: 18px;
+    font-weight: 800;
+  }
 }
 
 

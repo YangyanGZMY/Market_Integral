@@ -81,12 +81,14 @@ a, a:focus, a:hover {
   height: 100px;
   overflow: hidden;
   background-color: #2f9688;
+  display: flex;
+  justify-content: center;
   .sub-title{
     font-size: 38px;
     color: #FFF;
     display: inline-block;
-    height: 100px;
-    line-height: 100px;
+    height: 80px;
+    line-height: 80px;
     width: 240px;
     overflow: hidden;
     -moz-user-select: none;
@@ -102,18 +104,14 @@ a, a:focus, a:hover {
     font-weight: normal;
     background-color: #FFF;
     text-align: center;
-    margin: 20px 10px 20px 20px;
+    margin: 10px 10px 20px 20px;
     border-radius: 15px;
   }
-  //.sub-title-primary{
-  //  background: url("/public/image/sub_title_bg_primary.png");
-  //  background-size:100%;
-  //}
   .sub-title-detial{
     font-size: 16px;
     float: right;
     color: #FFF;
-    margin: 70px 18px;
+    margin: 50px 18px;
   }
   //.sub-title-success{
   //  background: url("/public/image/sub_title_bg_success.png") no-repeat;

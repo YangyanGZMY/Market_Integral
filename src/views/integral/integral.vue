@@ -1,6 +1,10 @@
 <template>
   <div class="integral-bar pd-tb-5">
     <el-card class="no-pd" id="integralBox">
+      <div slot="header" class="clearfix">
+        <span class="card-title">积分管理</span>
+        <el-button class="fr" size="small" type="warning" icon="el-icon-shopping-cart-1" @click="add">添加</el-button>
+      </div>
       <el-row>
         <el-row>
           <el-col :span="6">
@@ -9,15 +13,13 @@
               <el-radio label="amount">金额</el-radio>
             </el-radio-group>
           </el-col>
-          <el-col :span="11">
+          <el-col :span="14">
             <el-input type="text" v-model="searchText" suffix-icon="el-icon-search"></el-input>
           </el-col>
-          <el-col :span="7">
-            <el-button class="fr" size="small" type="warning" icon="el-icon-shopping-cart-1" @click="add">添加</el-button>
+          <el-col :span="4">
             <el-button class="fr" style="margin-right: 10px;" size="small" type="primary" icon="el-icon-search" @click="search">搜索</el-button>
           </el-col>
         </el-row>
-        <el-divider></el-divider>
         <el-table :height="tableHeight" class="market-table mg-t-10" :data="integralData" border v-loadmore="loadMore">
           <el-table-column
             align="center"
@@ -131,7 +133,7 @@ export default {
   mounted () {
     let contentBox = document.getElementById('integralBox')
     let contentHeight = window.getComputedStyle(contentBox).height
-    this.tableHeight = parseInt(contentHeight.substring(0, contentHeight.length - 2)) - 100
+    this.tableHeight = parseInt(contentHeight.substring(0, contentHeight.length - 2)) + 200
   },
   created () {
     this.get()
