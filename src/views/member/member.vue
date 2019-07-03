@@ -118,7 +118,7 @@ export default {
     let contentBox = document.getElementById('memberBox')
     let contentHeight = window.getComputedStyle(contentBox).height
     console.log(contentHeight)
-    this.tableHeight = parseInt(contentHeight.substring(0, contentHeight.length - 2)) + 200
+    this.tableHeight = parseInt(contentHeight.substring(0, contentHeight.length - 2)) + 380
     console.log(this.tableHeight)
     this.$bus.off('refreshMember').on('refreshMember', item => {
       this.querySearchAsync()

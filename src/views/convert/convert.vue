@@ -26,6 +26,12 @@
         </el-table-column>
         <el-table-column
           align="center"
+          prop="memberPhone"
+          min-width="100"
+          label="电话">
+        </el-table-column>
+        <el-table-column
+          align="center"
           prop="integralNum"
           label="已兑换">
         </el-table-column>
@@ -70,26 +76,24 @@ export default {
     // },
     querySearchAsync (queryString, callback) {
       let param = {
-        name: queryString
+        phone: queryString
       }
-      api.convert.search(param).then(response => {
+      api.convert.getConverts(param).then(response => {
         if (typeof callback === 'function') {
-          callback(response.result)
+          callback(response.result.logVos)
         }
+        this.convertData = response.result.logVoList
       })
     },
     handleSelect (item) {
-      let param = {
-        name: item.memberName
-      }
-      this.getConvert(param)
+      this.convertInfo = item.memberPhone
+      this.querySearchAsync(item.memberPhone)
     },
     getConvert (param) {
-      api.convert.getConverts(param).then(response => {
+      api.convert.search(param).then(response => {
         this.convertData = response.result
         this.carouselData = this.convertData.slice(0, 5)
         this.$bus.emit('carouselData', this.carouselData)
-        console.log(this.carouselData)
       })
     },
     convert () {
@@ -114,12 +118,12 @@ export default {
   mounted () {
     let contentBox = document.getElementById('convertBox')
     let contentHeight = window.getComputedStyle(contentBox).height
-    this.tableHeight = parseInt(contentHeight.substring(0, contentHeight.length - 2)) + 100
+    this.tableHeight = parseInt(contentHeight.substring(0, contentHeight.length - 2)) + 380
   },
   created () {
     this.getConvert()
     // this.play()
-    // this.querySearchAsync()
+    this.querySearchAsync()
   }
 }
 </script>

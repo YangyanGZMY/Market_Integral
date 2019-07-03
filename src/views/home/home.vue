@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <el-row>
-      <div class="pd-b-5" style="height: 50px">
+      <div v-if="carouselData.length > 4" class="pd-b-5" style="height: 50px">
         <el-carousel direction="vertical" :autoplay="true">
           <el-carousel-item v-for="item in carouselData" :key="item.logSeq">
             <h3 style="color: red;">
@@ -61,9 +61,9 @@ export default {
 </script>
 
 <style scoped>
-  .home{
-    height: 100%;
-  }
+  /*.home{*/
+    /*height: 100%;*/
+  /*}*/
   .el-row{
     height: 100%;
   }

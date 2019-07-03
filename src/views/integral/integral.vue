@@ -133,7 +133,7 @@ export default {
   mounted () {
     let contentBox = document.getElementById('integralBox')
     let contentHeight = window.getComputedStyle(contentBox).height
-    this.tableHeight = parseInt(contentHeight.substring(0, contentHeight.length - 2)) + 200
+    this.tableHeight = parseInt(contentHeight.substring(0, contentHeight.length - 2)) + 380
   },
   created () {
     this.get()
