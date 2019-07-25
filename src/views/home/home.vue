@@ -12,14 +12,17 @@
       </div>
     </el-row>
     <el-row>
-      <el-col :span="6">
-        <!--<el-button class="fr" size="small" type="warning" icon="el-icon-edit" @click="memberMove">注册</el-button>-->
+      <el-col :span="memberWith" class="sidebar-container">
+        <div @click="memberMove" style="position: fixed;">
+          <img src="/public/collapse.png"/>
+        </div>
+        <!--<el-button class="fr" type="warning" icon="el-icon-edit"></el-button>-->
         <member-bar></member-bar>
       </el-col>
-      <el-col :span="12">
+      <el-col :span="integralWith" class="sidebar-container">
         <integral-bar></integral-bar>
       </el-col>
-      <el-col :span="6">
+      <el-col :span="convertWith" class="sidebar-container">
           <convert-bar></convert-bar>
       </el-col>
     </el-row>
@@ -61,6 +64,13 @@ export default {
 </script>
 
 <style scoped>
+  .sidebar-container{
+    transition: width 1s;
+    -moz-transition: width 1s;
+    -webkit-transition: width 1s;
+    -o-transition: width 1s;
+    z-index: 99;
+  }
   /*.home{*/
     /*height: 100%;*/
   /*}*/

@@ -5,12 +5,14 @@ import store from './store'
 import initElementUI from '@/modules/elementUI'
 import initAxios from '@/modules/axios'
 import VueBus from 'vue-bus'
+import lottie from 'vue-lottie';
 
 Vue.config.productionTip = false
 
 initElementUI(Vue)
 initAxios()
 Vue.use(VueBus)
+Vue.component('lottie', lottie)
 
 Vue.directive('loadmore', {
   bind (el, binding) {
