@@ -12,17 +12,17 @@
       </div>
     </el-row>
     <el-row>
-      <el-col :span="memberWith" class="sidebar-container">
-        <div @click="memberMove" style="position: fixed;">
-          <img src="/public/collapse.png"/>
-        </div>
+      <el-col :span="memberWithFlag ? 6 : 3" class="sidebar-container">
         <!--<el-button class="fr" type="warning" icon="el-icon-edit"></el-button>-->
         <member-bar></member-bar>
       </el-col>
-      <el-col :span="integralWith" class="sidebar-container">
+      <el-col :span="integralWithFlag ? 12 : 15" class="sidebar-container">
+        <div @click="memberMove" class="collapse-box">
+          <img src="/images/collapse.png" width="20px" :class="{'is-collapse': imageRotate}"/>
+        </div>
         <integral-bar></integral-bar>
       </el-col>
-      <el-col :span="convertWith" class="sidebar-container">
+      <el-col :span="convertWithFlag ? 6 : 3" class="sidebar-container">
           <convert-bar></convert-bar>
       </el-col>
     </el-row>
@@ -37,22 +37,19 @@ import convertBar from '@/views/convert/convert'
 export default {
   data () {
     return {
-      memberWith: 6,
-      integralWith: 12,
-      convertWith: 6,
-      carouselData: []
+      memberWithFlag: true,
+      integralWithFlag: true,
+      convertWithFlag: true,
+      carouselData: [],
+      imageRotate: true
     }
   },
   components: { memberBar, integralBar, convertBar },
   methods: {
     memberMove () {
-      if (this.memberWith === 6) {
-        this.memberWith = 3
-        this.integralWith = 15
-      } else {
-        this.memberWith = 6
-        this.integralWith = 12
-      }
+      this.memberWithFlag = !this.memberWithFlag
+      this.integralWithFlag = !this.integralWithFlag
+      this.imageRotate = !this.imageRotate
     }
   },
   mounted () {
@@ -63,7 +60,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .sidebar-container{
     transition: width 1s;
     -moz-transition: width 1s;
@@ -71,9 +68,6 @@ export default {
     -o-transition: width 1s;
     z-index: 99;
   }
-  /*.home{*/
-    /*height: 100%;*/
-  /*}*/
   .el-row{
     height: 100%;
   }
@@ -116,5 +110,23 @@ export default {
   }
   .el-carousel__indicators--vertical{
     display: none !important;
+  }
+  .collapse-box{
+    display: inline-block;
+    height: 45px;
+    line-height: 43px;
+    margin-left: 3px;
+    cursor: pointer;
+    position: fixed;
+    img {
+      height: 20px;
+      transition: transform 1s;
+      -moz-transition: transform 1s;
+      -webkit-transition: transform 1s;
+      -o-transition: transform 1s;
+    }
+    .is-collapse{
+      transform: rotate(90deg)
+    }
   }
 </style>
