@@ -18,7 +18,8 @@
       </el-col>
       <el-col :span="integralWithFlag ? 12 : 15" class="sidebar-container">
         <div @click="memberMove" class="collapse-box">
-          <img src="/images/collapse.png" width="20px" :class="{'is-collapse': imageRotate}"/>
+<!--          <img src="/images/collapse.png" width="20px" :class="{'is-collapse': imageRotate}"/>-->
+          <img src="/images/sub_title_bg_warning.png" width="20px" :class="{'is-collapse': imageRotate}"/>
         </div>
         <integral-bar></integral-bar>
       </el-col>
